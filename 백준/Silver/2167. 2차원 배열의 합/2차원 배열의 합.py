@@ -1,0 +1,16 @@
+N, M = map(int,(input().split()))
+arranges = [list(map(int,(input().split()))) for _ in range(N)]
+# print(x)
+K = int(input())
+numlist = [list(map(int, input().split())) for _ in range(K)]
+
+for c in range(K):
+    sum = 0
+    i = numlist[c][0] # 1
+    j = numlist[c][1] #1
+    x = numlist[c][2] #2
+    y = numlist[c][3] #3
+    for x1 in range(i-1,x):
+        for y1 in range(j-1, y):
+            sum += arranges[x1][y1]
+    print(sum)

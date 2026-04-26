@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+using namespace std;
+
+int N;
+struct OK {
+	int idx, num;
+};
+vector<int> arr;
+stack<OK> ST;
+void input() {
+	cin >> N;
+	for (int i = 0; i < N; i++) {
+		int n; cin >> n;
+		arr.push_back(n);
+	}
+}
+void solve() {
+	for (int i = 0; i < N; i++) {
+		if (i == 0) {
+			ST.push({ i,arr[i] });
+		}
+		else {
+			if (!ST.empty()) {
+				while (!ST.empty() && ST.top().num < arr[i]) {
+					arr[ST.top().idx] = arr[i];
+					ST.pop();
+				}
+			}
+			ST.push({ i, arr[i] });
+		}
+	}
+	while (!ST.empty()) {
+		arr[ST.top().idx] = -1;
+		ST.pop();
+	}
+	for (int a : arr) cout << a << " ";
+}
+int main(void) {
+	input();
+	solve();
+	return 0;
+}

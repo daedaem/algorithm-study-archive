@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int N;
+struct ST {
+	int d, t;
+};
+vector<ST> sch;
+void input() {
+	cin >> N;
+	for (int i = 0; i < N; i++) {
+		ST a; cin >> a.d >> a.t;
+		sch.push_back(a);
+	}
+}
+bool COMP(ST& a, ST& b) {
+	return a.d < b.d;
+}
+int solve() {
+	sort(sch.begin(), sch.end(), COMP);
+	int day = 0;
+	int addDay = 0;
+	for (ST sc : sch) {
+		int limitDay = sc.d - (sc.d/7)*2;
+		if (sc.d % 7 == 6) limitDay--;
+		day += sc.t;
+		if (day > limitDay) {
+			addDay += (day - limitDay);
+			day = limitDay;
+		}
+		if (addDay > sc.d) return -1;
+	}
+	return addDay;
+}
+int main(void) {
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+	input();
+	cout << solve() <<'\n';
+	return 0;
+}

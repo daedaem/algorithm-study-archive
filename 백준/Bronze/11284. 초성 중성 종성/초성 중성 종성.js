@@ -1,0 +1,83 @@
+const cho = [
+  "ㄱ",
+  "ㄲ",
+  "ㄴ",
+  "ㄷ",
+  "ㄸ",
+  "ㄹ",
+  "ㅁ",
+  "ㅂ",
+  "ㅃ",
+  "ㅅ",
+  "ㅆ",
+  "ㅇ",
+  "ㅈ",
+  "ㅉ",
+  "ㅊ",
+  "ㅋ",
+  "ㅌ",
+  "ㅍ",
+  "ㅎ",
+];
+const joongsung = [
+  "ㅏ",
+  "ㅐ",
+  "ㅑ",
+  "ㅒ",
+  "ㅓ",
+  "ㅔ",
+  "ㅕ",
+  "ㅖ",
+  "ㅗ",
+  "ㅘ",
+  "ㅙ",
+  "ㅚ",
+  "ㅛ",
+  "ㅜ",
+  "ㅝ",
+  "ㅞ",
+  "ㅟ",
+  "ㅠ",
+  "ㅡ",
+  "ㅢ",
+  "ㅣ",
+];
+const jongsung = [
+  " ",
+  "ㄱ",
+  "ㄲ",
+  "ㄳ",
+  "ㄴ",
+  "ㄵ",
+  "ㄶ",
+  "ㄷ",
+  "ㄹ",
+  "ㄺ",
+  "ㄻ",
+  "ㄼ",
+  "ㄽ",
+  "ㄾ",
+  "ㄿ",
+  "ㅀ",
+  "ㅁ",
+  "ㅂ",
+  "ㅄ",
+  "ㅅ",
+  "ㅆ",
+  "ㅇ",
+  "ㅈ",
+  "ㅊ",
+  "ㅋ",
+  "ㅌ",
+  "ㅍ",
+  "ㅎ",
+];
+const INPUT = require("fs").readFileSync("/dev/stdin").toString();
+const inputCodeNumber = INPUT.codePointAt() - "가".codePointAt();
+console.log(
+  cho[Math.floor(inputCodeNumber / (joongsung.length * jongsung.length))]
+);
+console.log(
+  joongsung[Math.floor((inputCodeNumber / jongsung.length) % joongsung.length)]
+);
+console.log(jongsung[Math.floor(inputCodeNumber % jongsung.length)]);

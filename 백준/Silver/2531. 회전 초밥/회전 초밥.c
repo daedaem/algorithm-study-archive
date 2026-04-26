@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <string.h>
+int N, d, k, c;
+int maxvalue = 0;
+int jubsi[30000 + 10] = {0};
+int visited[3000 + 10] = {0};
+int solve(void);
+void input(void)
+{
+	scanf("%d %d %d %d", &N, &d, &k, &c);
+	for (int i = 0; i < N; i++)
+	{
+		scanf("%d", &jubsi[i]);
+	}
+}
+int solve(void)
+{
+	int maxx = 0;
+	for (int i = 0; i < N; i++) 
+	{
+		int cnt = 1;
+		memset(visited, 0, sizeof(visited));
+		visited[c] = 1;
+		for (int j = 0; j < k; j++) 
+		{
+			int idx = (i + j) % N;
+			if (visited[jubsi[idx]] == 1) continue;
+			else 
+			{
+				visited[jubsi[idx]] = 1;
+				cnt++;
+			}
+		}
+		if (maxx < cnt) maxx = cnt;
+	}
+	return maxx;
+}
+int main(void) 
+{
+	input();
+	int result = solve();
+	printf("%d", result);
+	return 0;
+}

@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+int main(void) 
+{
+	// 마지막에 길이 플러스
+	int lens;
+	int sum = 0;
+	char problem[15 + 2];
+	char phones[15 + 2][4+2] = { {0},{0}, {'A','B','C'}, {'D','E','F'},{'G','H','I'},{'J','K','L'},{'M','N','O'},{'P','Q','R','S'},{'T','U','V'},{'W','X','Y','Z'},{'0'} };
+	scanf("%s", problem);
+	lens = strlen(problem);
+	int phonelens = 11;
+	int yes = 0;
+	for (int i = 0; i < lens; i++) 
+	{
+		for (int j = 0; j < phonelens; j++) 
+		{
+			yes = 0;
+			for (int z = 0; z < strlen(phones[j]); z++) 
+			{
+				
+				if (phones[j][z] == problem[i])
+				{
+
+					sum += j;
+					yes = 1;
+					break;
+				}
+			}
+			if (yes == 1) break;
+		}
+	}
+	printf("%d", sum + lens);
+	return 0;
+}
