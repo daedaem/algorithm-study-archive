@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int visit[20000+1];
+int record[20000+1];
+vector<int> adj[20000+1];
+int answer=0;
+void DFS(int node, int cnt){
+    if(record[node]>cnt){
+        record[node]=cnt;
+    }
+    for(int i=0; i<adj[node].size();i++){
+        int next = adj[node][i];
+        if(visit[next]) continue;
+        if(record[next] <= cnt+1) continue;
+        visit[next]=1;
+        DFS(next, cnt+1);
+        visit[next]=0;
+    }
+    
+}
+int solution(int n, vector<vector<int>> edge) {
+    for(int i=0; i<edge.size();i++){
+        adj[edge[i][0]].push_back(edge[i][1]);
+        adj[edge[i][1]].push_back(edge[i][0]);
+    }
+    fill(&record[1], &record[n+1], 0xf77777);
+    record[1]=0;
+    DFS(1, 0);
+    int maxx=0;
+    for(int i=1; i<=n;i++){
+        if(maxx<record[i]){
+           maxx=record[i];
+            answer=1;
+        }
+        else if(maxx==record[i]) answer++;   
+    }
+    return answer;
+}

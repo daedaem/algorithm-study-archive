@@ -1,0 +1,36 @@
+function solution(n, m, x, y, r, c, k) {
+  const dir = [
+    [1, 0, "d"],
+    [0, -1, "l"],
+    [0, 1, "r"],
+    [-1, 0, "u"],
+  ];
+  let path = "";
+
+  if (
+    (Math.abs(x - r) + Math.abs(y - c)) % 2 !== k % 2 ||
+    k < Math.abs(x - r) + Math.abs(y - c)
+  ) {
+    return "impossible";
+  }
+
+  while (k > 0) {
+    for (let i = 0; i < 4; i++) {
+      const nx = x + dir[i][0];
+      const ny = y + dir[i][1];
+
+      if (nx < 1 || ny < 1 || nx > n || ny > m) continue;
+
+      const curDist = Math.abs(nx - r) + Math.abs(ny - c);
+      if (curDist < k) {
+        path += dir[i][2];
+        x = nx;
+        y = ny;
+        k--;    
+        break;
+      }
+    }
+  }
+
+  return path;
+}

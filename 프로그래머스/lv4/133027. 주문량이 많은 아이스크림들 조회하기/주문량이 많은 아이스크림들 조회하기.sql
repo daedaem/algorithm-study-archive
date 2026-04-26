@@ -1,0 +1,17 @@
+SELECT
+    F.FLAVOR
+FROM (
+    SELECT
+        H.FLAVOR,
+        SUM(H.TOTAL_ORDER + J.TOTAL_ORDER) AS TOTAL
+    FROM
+        FIRST_HALF H
+    INNER JOIN
+        JULY J ON H.FLAVOR = J.FLAVOR
+    GROUP BY
+        H.FLAVOR
+    ORDER BY
+        TOTAL DESC
+)F
+WHERE
+    ROWNUM <= 3;

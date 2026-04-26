@@ -1,0 +1,31 @@
+const checkBTree = (b_str, start, end) => {
+  const root = Math.floor((start + end) / 2);
+  const left_c = Math.floor((start + root - 1) / 2);
+  const right_c = Math.floor((root + 1 + end) / 2);
+
+  if (start == end) {
+    return true;
+  }
+
+  if (
+    b_str[root] === "0" &&
+    (b_str[left_c] === "1" || b_str[right_c] === "1")
+  ) {
+    return false;
+  }
+
+  if (!checkBTree(b_str, start, root - 1)) return false;
+  if (!checkBTree(b_str, root + 1, end)) return false;
+  return true;
+};
+
+function solution(numbers) {
+  const answer = numbers.map((number) => {
+    let bi_num = number.toString(2);
+    let dep = Math.ceil(Math.log2(bi_num.length+1));
+    let nodeCnt = 2 ** dep - 1;
+    const bi_tree = bi_num.padStart(nodeCnt, "0");
+    return +checkBTree(bi_tree, 0, bi_tree.length - 1);
+  });
+  return answer;
+}
